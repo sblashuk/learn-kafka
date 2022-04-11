@@ -1,0 +1,22 @@
+version: '3'
+services:
+  producer:
+    build:
+      context: .
+    restart: on-failure
+    depends_on:
+      - broker
+    environment:
+      KAFKA_URL: //broker:29092
+      KAFKA_TOPIC: hello-world
+      SPRING_PROFILES_ACTIVE: producer
+  consumer:
+    build:
+      context: .
+    restart: on-failure
+    depends_on:
+      - broker
+    environment:
+      KAFKA_URL: //broker:29092
+      KAFKA_TOPIC: hello-world
+      SPRING_PROFILES_ACTIVE: consumer
